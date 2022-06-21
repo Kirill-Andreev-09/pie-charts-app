@@ -38,23 +38,37 @@ const Chart: React.FC = () => {
     };
   }, []);
 
+  const setNewWidth = (increaseWidth: number, increaseValue: number) => {
+    setWidthCharts(Math.round(size * increaseWidth));
+    setIncrease(increaseValue);
+  };
+
   useEffect(() => {
-    if (size >= 1920) {
-      setWidthCharts(Math.round(size * 0.8));
-      setIncrease(1.9);
-    } else if (size < 1920 && size > 1280) {
-      setWidthCharts(Math.round(size * 0.55));
-      setIncrease(1.2);
-    } else if (size > 991 && size <= 1280) {
-      setWidthCharts(Math.round(size * 0.8));
-      setIncrease(1.1);
-    } else if (size <= 991 && size > 767) {
-      setWidthCharts(Math.round(size * 0.8));
-      setIncrease(0.7);
-    } else if (size <= 767) {
-      setWidthCharts(Math.round(size));
-      setIncrease(0.87);
+    switch (true) {
+      case size > 1920:
+        setNewWidth(0.8, 1.9);
+        break;
+
+      case size <= 1920 && size > 1680:
+        setNewWidth(0.7, 1.6);
+        break;
+      case size <= 1680 && size > 1366:
+        setNewWidth(0.7, 1.4);
+        break;
+      case size <= 1366 && size > 1280:
+        setNewWidth(0.75, 1.2);
+        break;
+      case size <= 1280 && size > 991:
+        setNewWidth(0.8, 1.1);
+        break;
+      case size <= 991 && size > 767:
+        setNewWidth(0.8, 0.9);
+        break;
+      default:
+        setNewWidth(1, 0.85);
+        break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size]);
 
   const onPieEnter = (title: string, values: any): void => {
