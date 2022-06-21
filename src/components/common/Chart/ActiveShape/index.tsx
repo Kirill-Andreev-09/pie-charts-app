@@ -6,6 +6,7 @@ type ActiveShapeType = {
   item: ChartItemDataType[];
   name: string;
   currentValue: number;
+  increase: number;
 };
 
 const ActiveShape: React.FC<ActiveShapeType> = ({
@@ -13,6 +14,7 @@ const ActiveShape: React.FC<ActiveShapeType> = ({
   item,
   name,
   currentValue,
+  increase,
 }) => {
   const {cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill} = props;
 
@@ -21,20 +23,20 @@ const ActiveShape: React.FC<ActiveShapeType> = ({
       <text
         x={cx}
         y={cy}
-        dy={-20}
+        dy={-10 * increase * 2}
         textAnchor="middle"
         fill={"black"}
-        style={{fontSize: "14px", marginBottom: "20px", fontWeight: 500}}>
+        style={{fontSize: `${15 * increase}px`, fontWeight: 500}}>
         {name}
       </text>
       <text
         name="sum"
         x={cx}
         y={cy}
-        dy={20}
+        dy={15 * increase * 2}
         textAnchor="middle"
         fill={"#e9a664"}
-        style={{fontSize: "28px", fontWeight: 600}}>
+        style={{fontSize: `${40 * increase}px`, fontWeight: 600}}>
         {currentValue}
       </text>
       <Sector

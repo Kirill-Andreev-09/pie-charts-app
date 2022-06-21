@@ -48,7 +48,6 @@ const Chart: React.FC = () => {
       case size > 1920:
         setNewWidth(0.8, 1.9);
         break;
-
       case size <= 1920 && size > 1680:
         setNewWidth(0.7, 1.6);
         break;
@@ -64,8 +63,14 @@ const Chart: React.FC = () => {
       case size <= 991 && size > 767:
         setNewWidth(0.8, 0.9);
         break;
+      case size <= 600 && size > 475:
+        setNewWidth(0.9, 0.6);
+        break;
+      case size <= 475 && size > 375:
+        setNewWidth(0.9, 0.5);
+        break;
       default:
-        setNewWidth(1, 0.85);
+        setNewWidth(1, 0.42);
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -164,6 +169,7 @@ const Chart: React.FC = () => {
                     props={props}
                     item={el.chartItemData}
                     name={el.name}
+                    increase={increase}
                     currentValue={
                       itemInfoName?.title === el.name
                         ? itemInfoName?.value
