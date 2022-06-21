@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Cell, Pie, PieChart} from "recharts";
 import {chartData} from "../../../utils/mock-data";
 import "./Chart.scss";
@@ -19,11 +19,43 @@ const Chart: React.FC = () => {
   const [itemInfoName, setItemInfoName] = useState<ItemType | null>(null);
   const [innerPieData, setInnerPieData] = useState<ItemType | null>(null);
 
+  const [size, setSize] = useState<number>(0);
+  const ref = useRef<any>();
+
+  const [increase, setIncrease] = useState<number>(0);
+
+  const resizeHandler = () => {
+    const {innerWidth} = window;
+    ref.current = innerWidth;
+    setSize(innerWidth);
+  };
+
   useEffect(() => {
-    let width = 0;
-    width = window.innerWidth > 0 ? window.innerWidth : window.screen.width;
-    setWidthCharts(Math.round(width * 0.92));
+    window.addEventListener("resize", resizeHandler);
+    resizeHandler();
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
   }, []);
+
+  useEffect(() => {
+    if (size >= 1920) {
+      setWidthCharts(Math.round(size * 0.8));
+      setIncrease(1.9);
+    } else if (size < 1920 && size > 1280) {
+      setWidthCharts(Math.round(size * 0.55));
+      setIncrease(1.2);
+    } else if (size > 991 && size <= 1280) {
+      setWidthCharts(Math.round(size * 0.8));
+      setIncrease(1.1);
+    } else if (size <= 991 && size > 767) {
+      setWidthCharts(Math.round(size * 0.8));
+      setIncrease(0.7);
+    } else if (size <= 767) {
+      setWidthCharts(Math.round(size));
+      setIncrease(0.87);
+    }
+  }, [size]);
 
   const onPieEnter = (title: string, values: any): void => {
     const {name, value} = values;
@@ -70,10 +102,10 @@ const Chart: React.FC = () => {
                 key={index}
                 onMouseEnter={(values) => onPieEnter(el.name, values)}
                 onMouseLeave={onPieLeave}
-                cx={el.coordinates.cx}
+                cx={el.coordinates.cx * increase}
                 cy={el.coordinates.cy}
-                innerRadius={60}
-                outerRadius={80}
+                innerRadius={60 * increase}
+                outerRadius={80 * increase}
                 fill="#8884d8"
                 dataKey="value"
                 data={el.chartItemData}>
@@ -106,7 +138,7 @@ const Chart: React.FC = () => {
                 data={data01}
                 dataKey="value"
                 nameKey="name"
-                cx={el.coordinates.cx}
+                cx={el.coordinates.cx * increase}
                 cy={el.coordinates.cy}
                 outerRadius={50}
                 fill="transparent"

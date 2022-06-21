@@ -1,34 +1,28 @@
-
 @import "../../../assets/style-tokens/color-palette";
 
-.recharts-wrapper {
-    display: flex;
-}
-
 .info {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &-item {
     display: flex;
     align-items: center;
-    // justify-content: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 33%;
 
-    &-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-direction: column;
-        width: 33%;
+    &__description {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      width: 80%;
 
-        &__description{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: row;
-            width: 80%;
-
-            &.active {
-                color: #90739c;
-                text-decoration: underline;
-            }
-        }
+      &.active {
+        color: #90739c;
+        text-decoration: underline;
+      }
     }
+  }
 }
