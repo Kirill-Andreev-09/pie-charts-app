@@ -1,0 +1,49 @@
+@import "../../../assets/style-tokens/color-palette";
+@import "../../../assets/style-tokens/mixins";
+
+.default-form {
+  height: 500px;
+  width: 400px;
+  @include flex(column, center, center);
+  background-color: $black;
+  opacity: 0.98;
+  border-radius: 10px;
+
+  .ant-form {
+    width: 50%;
+  }
+
+  h1 {
+    color: $white;
+    font-weight: 400;
+  }
+
+  .buttons {
+    width: 100%;
+    @include flex(column, space-between, center);
+
+    .column {
+      margin-top: 10px;
+      height: 32px;
+      @include flex(column, center, center);
+    }
+  }
+
+  .errors {
+    height: 80px;
+    width: 100%;
+    @include flex(column, center, center);
+    color: $red;
+    flex-wrap: wrap;
+  }
+
+  .success {
+    height: 80px;
+    @include flex(column, center, center);
+    color: $green;
+  }
+
+  .ant-checkbox-wrapper {
+    color: $white;
+  }
+}
