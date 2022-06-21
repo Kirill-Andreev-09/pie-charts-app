@@ -24,10 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route
-          path="/"
-          element={<Navigate replace to={`${routeUrl}/sign-in`} />}
-        />
+        <Route path="/" element={<Navigate replace to="/sign-in" />} />
       </Routes>
     </BrowserRouter>
   );
