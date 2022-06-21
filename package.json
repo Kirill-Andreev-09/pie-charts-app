@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "index.js",
+  "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.6.8",
@@ -21,6 +22,7 @@
     "apollo-cache-inmemory": "^1.6.6",
     "eslint-plugin-prettier": "^4.0.0",
     "formik": "^2.2.9",
+    "gh-pages": "^4.0.0",
     "graphql": "^16.5.0",
     "node-sass": "^7.0.1",
     "react": "^18.2.0",
@@ -34,6 +36,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -b master -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "codegen": "graphql-codegen --config codegen.yml"
